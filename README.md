@@ -28,6 +28,73 @@ This list comes with no warranties: read carefully the [model-specific instructi
 The LibreMesh firmware can be compiled by following [these instructions][13].
 
 
+## Run a linux development environment
+
+Download the Source Code
+git clone [https://github.com/libremesh/lime-packages.git]
+cd lime-packages
+
+On an Ubuntu system, the following command will install the minimum compilation dependencies:
+
+sudo apt update
+sudo apt install --no-install-recommends git ca-certificates subversion wget make gcc g++ libncurses5-dev gawk unzip file patch python3-distutils python3-minimal python2-minimal libpython2-stdlib
+
+Install qemu
+
+sudo apt-get install qemu qemu-utils qemu-kvm virt-manager libvirt-daemon-system libvirt-clients bridge-utils virt-manager virt-viewer libvirt-bin
+
+Download compiled images
+[https://repo.librerouter.org/lros/releases/1.4/targets/x86/64/]
+
+In the lime-packages dir run:
+ sudo ./tools/qemu_dev_start /DIRECTORY/YOURUSER/Downloads/librerouteros-1.4-r11343+1-73adbf987f-x86-64-generic-rootfs.tar.gz /DIRECTORY/YOURUSER/Downloads/librerouteros-1.4-r11343+1-73adbf987f-x86-64-ramfs.bzImage 
+
+
+It will show you: 
+
+BusyBox v1.30.1 () built-in shell (ash)
+
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ LibreRouterOs 1.4, r11343+1-73adbf987f
+ -----------------------------------------------------
+  ___   __ __                _______             __
+ |   |_|__|  |--.----.-----.|   |   |-----.-----|  |--.
+ |     |  |  _  |   _|  -__||       |  -__|__ --|     |
+ |_____|__|_____|__| |_____||__|_|__|_____|_____|__|__|
+
+ ------------------------------------------------------
+ LiMe 9654a168273c94d5f9c307266ab75f58a57fa860 development (9654a168273c94d5f9c)
+ ------------------------------------------------------
+ https://libremesh.org
+ ------------------------------------------------------
+
+ === System Notes =================================================
+
+ = edit via http://thisnode.info/app/#/notes or /etc/banner.notes =
+
+=== WARNING! =====================================
+There is no root password defined on this device!
+Use the "passwd" command to set up a new password
+in order to prevent unauthorized SSH logins.
+--------------------------------------------------
+root@(none):/# 
+
+
+Finally open [http://10.13.0.1/] in your favorite browser
+
+If it gives an error qemu-system-x86_64: -enable-kvm: unsupported machine type. Use -machine help to list supported machines
+
+just edit the file  /tools/qemu_dev_start.sh
+erase the following line and re-run 
+-enable-kvm
+
+
+
 ## Testing
 
 LibreMesh has unit tests that help us add new features while keeping maintenance effort contained.
